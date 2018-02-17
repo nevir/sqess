@@ -112,6 +112,11 @@ export default class Queue implements QueueConfig {
       deleteImmediately: DEFAULTS.DELETE_IMMEDIATELY,
       onFinish: DEFAULTS.FINISH_HANDLER,
     });
+    // Validate that we have an instance of AWS.SQS that has credentials
+    // configured.
+    if (!_.get(this.sqs, 'config.credentials.accessKeyId')) {
+      throw new Error(`No AWS credentials were provided`);
+    }
   }
 
   /**
