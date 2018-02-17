@@ -10,7 +10,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
-    "declarationDir": "types",
+    "declarationDir": "dist/types",
     "outDir": "dist"
   },
   "include": [
