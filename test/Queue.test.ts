@@ -64,6 +64,19 @@ describe(`Queue`, () => {
     await queue.create();
   });
 
+  describe(`constructor`, () => {
+    it(`validates the name, even when injecting the .fifo suffix`, () => {
+      expect(() => {
+        new Queue({
+          ...params,
+          fifo: true,
+          queueName:
+            'a-queue-name-with-79-chars-that-exceeds-the-limit-when-the-fifo-suffix-is-added',
+        });
+      }).toThrow(/characters/i);
+    });
+  });
+
   describe(`create`, () => {
     it(`creates a queue with the provided name`, () => {
       expect(queue.queueUrl).toBe(queueUrl);
