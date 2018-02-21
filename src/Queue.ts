@@ -96,12 +96,13 @@ export default class Queue implements QueueConfig {
   public deleteImmediately: boolean;
 
   constructor(config: QueueConfig) {
-    utils.validateQueueName(config.queueName);
     // If this is a FIFO queue and the provided queue name
     // doesn't end with `.fifo`, append it now.
     if (config.fifo && !utils.isFifoQueueName(config.queueName)) {
       config.queueName = config.queueName + '.fifo';
     }
+    utils.validateQueueName(config.queueName);
+
     _.defaults(this, config, {
       sqs: new AWS.SQS(),
       fifo: DEFAULTS.FIFO,
