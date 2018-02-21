@@ -53,6 +53,12 @@ describe(`Queue`, () => {
   beforeEach(async () => {
     clearMocks();
     sqs = new AWS.SQS();
+    sqs.config = {
+      credentials: {
+        accessKeyId: 'FAKE-ACCESS-KEY',
+        secretAccessKey: 'FAKE-SECRET-KEY',
+      },
+    };
     params = {
       queueName,
       handler: jest.fn(),
